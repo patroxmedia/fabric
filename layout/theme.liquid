@@ -17,9 +17,10 @@
   </head>
   <body>
   
-    {% section 'header' %}
+    {% comment %} {% section 'header' %} {% endcomment %}
     
-   
+    {% render 'header' %}
+
      <div>
     <main role="main">
       {{ content_for_layout }}
