@@ -10,16 +10,17 @@
     {{ content_for_header }}
     <!-- Header hook for plugins -->
     {{ 'application.css' | asset_url | stylesheet_tag }}
-    {{ 'application.js' | asset_url | script_tag }}
+    {% comment %} {{ 'application.js' | asset_url | script_tag }} {% endcomment %}
+    <script src="{{ 'application.js' | asset_url }}" defer></script>
     <script defer src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
   </head>
   <body>
   
-    {% comment %} {% section 'header' %} {% endcomment %}
+    {% section 'header' %}
     
-    {% render 'header' %}
+
 
      <div>
     <main role="main">
