@@ -1,9 +1,21 @@
+// module.exports = {
+//   content: [
+//     'layout/**/*.liquid',
+//     './assets/**/*.liquid'],
+//   theme: {
+//     extend: {},
+//   },
+//   plugins: [],
+// };
+
 module.exports = {
-  content: [
-    'layout/**/*.liquid',
-    './assets/**/*.liquid'],
+  purge: [],
+  darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
   },
+  variants: {
+    extend: {},
+  },
   plugins: [],
-};
+}
