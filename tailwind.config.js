@@ -8,14 +8,37 @@
 //   plugins: [],
 // };
 
+// module.exports = {
+//   purge: [],
+//   darkMode: false, // or 'media' or 'class'
+//   theme: {
+//     extend: {
+//       height:{
+//         '94': '22rem'
+//       }
+//     },
+//   },
+//   variants: {
+//     extend: {},
+//   },
+//   plugins: [],
+// }
+
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  purge: [],
-  darkMode: false, // or 'media' or 'class'
+  content: [
+    "./layout/**/*.liquid",
+    "./templates/**/*.liquid",
+    "./sections/**/*.liquid",
+    "./snippets/**/*.liquid",
+    "./assets/**/*.css"
+  ],
   theme: {
-    extend: {},
-  },
-  variants: {
-    extend: {},
+    extend: {
+      height:{
+        '94': '22rem'
+      }
+    },
   },
   plugins: [],
 }
