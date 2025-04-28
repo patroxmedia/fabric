@@ -11,9 +11,16 @@
     <!-- Header hook for plugins -->
    
     {{ 'application.css' | asset_url | stylesheet_tag }}
-    
+   <style>
+    .menu-color{
+        background-color: antiquewhite;
+    }
+</style>
     <script src="{{ 'application.js' | asset_url }}" defer></script>
+
+
     
+
 
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
@@ -27,6 +34,8 @@
      <div>
     <main role="main">
       {{ content_for_layout }}
+
+    
 
       
     </main>
