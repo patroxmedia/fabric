@@ -1,27 +1,59 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "sections":{
+  "sections": {
     "template": {
       "type": "template-product",
-      "blocks":{
-        "vendor":{ "type":"vendor"},
-        "title":{ "type":"title"},
-        "price":{ "type":"price"},
-        "variant_selector":{ "type":"variant_selector"},
-        "quantity":{ "type":"quantity"},
-        "description":{ "type":"description"},
-        "checkout_button":{ "type":"checkout_button"}
+      "blocks": {
+        "vendor_KemQLf": {
+          "type": "vendor",
+          "settings": {}
+        },
+        "title_9ztpmm": {
+          "type": "title",
+          "settings": {}
+        },
+        "price_Nyq6Ye": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_selector_pDmAKz": {
+          "type": "variant_selector",
+          "settings": {}
+        },
+        "quantity_8LmbEW": {
+          "type": "quantity",
+          "settings": {}
+        },
+        "description_9i8EFP": {
+          "type": "description",
+          "settings": {}
+        },
+        "checkout_buttons_CN4dgh": {
+          "type": "checkout_buttons",
+          "settings": {}
+        }
       },
-      "block_order":[
-        "vendor",
-        "title",
-        "price",
-        "variant_selector",
-        "quantity",
-        "description",
-        "checkout_button"
-      ]
+      "block_order": [
+        "vendor_KemQLf",
+        "title_9ztpmm",
+        "price_Nyq6Ye",
+        "variant_selector_pDmAKz",
+        "quantity_8LmbEW",
+        "description_9i8EFP",
+        "checkout_buttons_CN4dgh"
+      ],
+      "settings": {}
     }
-    
   },
-  "order": ["template"]
+  "order": [
+    "template"
+  ]
 }
