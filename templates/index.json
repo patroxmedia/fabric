@@ -16,53 +16,9 @@
         "fetured_collection": "frontpage",
         "number_of_products": 4
       }
-    },
-    "product_showcase_JfAezb": {
-      "type": "product-showcase",
-      "blocks": {
-        "product_zPJbt7": {
-          "type": "product",
-          "settings": {
-            "product": "smart-watch",
-            "show_description": true,
-            "show_quick_add": true
-          }
-        },
-        "product_qjyUr8": {
-          "type": "product",
-          "settings": {
-            "product": "",
-            "show_description": true,
-            "show_quick_add": true
-          }
-        },
-        "product_yVMhqX": {
-          "type": "product",
-          "settings": {
-            "product": "",
-            "show_description": true,
-            "show_quick_add": true
-          }
-        }
-      },
-      "block_order": [
-        "product_zPJbt7",
-        "product_qjyUr8",
-        "product_yVMhqX"
-      ],
-      "name": "Product Showcase",
-      "settings": {
-        "heading": "Featured Products",
-        "subheading": "Discover our most popular products",
-        "columns_desktop": 3,
-        "show_view_all": true,
-        "view_all_url": "",
-        "view_all_text": "View All Products"
-      }
     }
   },
   "order": [
-    "featured-collection",
-    "product_showcase_JfAezb"
+    "featured-collection"
   ]
 }
