@@ -43,7 +43,7 @@
                   {% if product.compare_at_price > product.price %}
                     <div class="product-card__badge">
                       <span class="badge badge--sale">
-                        {{ 'products.product.on_sale' | t }}
+                        Sale
                       </span>
                     </div>
                   {% endif %}
@@ -55,7 +55,16 @@
                   </h3>
                   
                   <div class="product-card__price">
-                    {% render 'price', product: product, use_variant: true, show_badges: true %}
+                    {% if product.compare_at_price > product.price %}
+                      <span class="price price--on-sale">
+                        <span class="price__current">{{ product.price | money }}</span>
+                        <span class="price__compare">{{ product.compare_at_price | money }}</span>
+                      </span>
+                    {% else %}
+                      <span class="price">
+                        <span class="price__current">{{ product.price | money }}</span>
+                      </span>
+                    {% endif %}
                   </div>
 
                   {% if block.settings.show_description and product.description != blank %}
@@ -72,16 +81,16 @@
                                   class="btn btn--primary btn--full-width quick-add-btn"
                                   data-product-id="{{ product.id }}"
                                   data-variant-id="{{ product.selected_or_first_available_variant.id }}">
-                            {{ 'products.product.add_to_cart' | t }}
+                            Add to Cart
                           </button>
                         {% else %}
                           <a href="{{ product.url }}" class="btn btn--primary btn--full-width">
-                            {{ 'products.product.choose_options' | t }}
+                            Choose Options
                           </a>
                         {% endif %}
                       {% else %}
                         <button type="button" class="btn btn--secondary btn--full-width" disabled>
-                          {{ 'products.product.sold_out' | t }}
+                          Sold Out
                         </button>
                       {% endif %}
                     </div>
@@ -113,7 +122,8 @@
                   </h3>
                   {% if block.settings.show_product_count %}
                     <p class="collection-card__count">
-                      {{ 'collections.general.items_with_count' | t: count: collection.products_count }}
+                      {{ collection.products_count }} 
+                      {% if collection.products_count == 1 %}item{% else %}items{% endif %}
                     </p>
                   {% endif %}
                 </div>
@@ -316,6 +326,21 @@ document.addEventListener('DOMContentLoaded', function() {
 .product-card__price {
   margin-bottom: 15px;
   font-weight: 600;
+}
+
+.price__current {
+  color: rgb(var(--color-foreground));
+}
+
+.price--on-sale .price__current {
+  color: rgb(var(--color-accent));
+}
+
+.price__compare {
+  color: rgba(var(--color-foreground), 0.5);
+  text-decoration: line-through;
+  margin-left: 8px;
+  font-size: 0.9em;
 }
 
 .product-card__description {
