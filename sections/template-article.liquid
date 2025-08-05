@@ -1,0 +1,168 @@
+
+<article class="py-10" itemscope itemtype="http://schema.org/BlogPosting">
+
+
+{% for block in section.blocks %}
+  {% case block.type %}
+
+    {% when "article_title" %} 
+
+    <div class="flex items-center justify-center">
+
+        <div class="max-w-7xl text-center">
+            <a href="{{ blog.url }}" class="text-base uppercase text-blue hover:text-grey-500 font-bold shadow-xl px-3 rounded-full mb-1 bg-blue-300 ">{{ blog.title }}</a>
+            <h1 class="text-4xl md:text-6xl font-medium" itemprop="headline">{{ article.title }} </h1>
+
+        </div>
+
+    </div>
+    
+
+    {% when "article_author" %}
+
+        <div class="flex items-center justify-center" itemscope itemtype="http://schema.org/Person">
+
+            <div class="max-w-7xl text-center" >
+                {% if section.settings.enable_author %}
+                    <small itemprop="author">{{ article.author }}</small>
+                {% endif %}
+            </div>
+        </div>
+       
+
+    {% when "article_published_date" %}
+        <div class="flex items-center justify-center">
+            <div class="max-w-7xl text-center" >
+                {% if section.settings.enable_published_date %}
+                    <time itemprop="datePublished dateCreated" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%Y-%m-%d' }}</time>
+                {% endif %}
+
+            </div>
+        </div>
+     
+
+    {% when "feature_image" %}
+<div class="max-w-7xl bl-blue-100 rounded-lg mx-2 md:mx-auto overflow-hidden my-10" itemprop="image">
+
+    {% if article.image !=blank %}
+        <img class="w-full h-80  md:h-96 object-cover object-centre" src="{{ article.image | img_url:'large' }}" alt="{{ article.image.alt }}"> 
+        {% else %}
+            {% assign placeholder_image = 'lifestyle-1' %}
+            {{ placeholder_image | placeholder_svg_tag:'w-full h-80  md:h-96 object-cover object-centre p-5' }}
+    {% endif %}
+</div>
+       
+
+    {% when "article_content" %}
+        <div class="flex items-center justify-center" >
+            <div class="max-w-7xl" itemprop="articleBody">
+                {{ article.content }}
+            </div>
+        </div>
+    {% else %}
+      
+  {% endcase %}
+{% endfor %}
+
+</article>
+
+{% if blog.comments_enabled? %}
+  
+    <div id="comments" class="my-0 flex items-center justify-center">
+{%if article.comments_count > 0 %}
+    {% else %}
+        there is no comments yet
+{% endif %}
+
+    </div>
+    <div id="comment_form" class="my-0 flex items-center justify-center">
+        {% form 'new_comment', article %}
+          
+            <div class="flex-1 mx-auto items-center justify-center max-w-4xl px-4">
+
+                <div >
+
+                </div>
+
+            </div>
+        {% endform %}
+
+    </div>
+{% endif %}
+
+<script type="application/ld+json"> 
+{
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ article.title | json }},
+    "articleBody": {{ article.content | strip_html | json }},
+    {% if article.excerpt != blank %}
+        "description": {{ article.excerpt | strip_html | json }},
+    {% endif %}
+    {% if article.image %}
+        "image": [
+            {{ article.image | img_url: "medium" | prepend: 'https:' | json }} 
+        ],
+    {% endif %}
+    "datePublished": {{ article.published_at | date: format: "default" | json }},
+    "dateCreated": {{ article.created_at | date: format: "default" | json }},
+    "author": {
+        "@type": "Person",
+        "name": {{ article.author | json }}
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": {{ shop.name | json }}
+    }
+}
+
+</script>
+
+{% schema %}
+
+{
+"name": "Template Article",
+"settings": [
+    {
+    "type": "checkbox",
+    "id": "enable_author",
+    "default":true,
+    "label": "Display Author Name"
+    },
+    {
+        "type": "checkbox",
+        "id": "enable_published_date",
+        "default":true,
+        "label": "Display Published Date"
+    }
+],
+"blocks": [
+    {
+    "type": "article_title",
+    "name": "Title",
+    "limit": 1
+    },
+    {
+        "type": "article_author",
+        "name":"Author",
+        "limit": 1
+    },
+    {
+    "type": "article_published_date",
+    "name":"Published Date",
+    "limit": 1
+    },
+    {
+    "type": "feature_image",
+    "name":"Thumbnail",
+    "limit": 1
+    },
+    {
+    "type": "article_content",
+    "name":"Content",
+    "limit": 1
+    }
+]
+}
+
+{% endschema %}
