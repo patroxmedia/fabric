@@ -1,0 +1,206 @@
+<section class="promo-grid">
+  <div class="promo-grid__container">
+
+    <!-- LEFT LARGE CARD -->
+    {% for block in section.blocks %}
+      {% if block.settings.card_position == 'left' %}
+        <a href="{{ block.settings.link }}" class="promo-card promo-card--large" {{ block.shopify_attributes }}>
+          <div class="promo-card__content">
+            <h2>{{ block.settings.title }}</h2>
+            {% if block.settings.subtitle != blank %}
+              <p>{{ block.settings.subtitle }}</p>
+            {% endif %}
+            <p class="price">{{ block.settings.price }}</p>
+            <span class="btn">{{ block.settings.button_text }}</span>
+          </div>
+
+          {% if block.settings.image %}
+            <img
+              src="{{ block.settings.image | image_url: width: 900 }}"
+              alt="{{ block.settings.title }}"
+              loading="lazy"
+            >
+          {% endif %}
+        </a>
+      {% endif %}
+    {% endfor %}
+
+    <!-- RIGHT SIDE -->
+    <div class="promo-grid__right">
+
+      <!-- RIGHT TOP SINGLE -->
+      {% for block in section.blocks %}
+        {% if block.settings.card_position == 'right_top' %}
+          <a href="{{ block.settings.link }}" class="promo-card promo-card--wide" {{ block.shopify_attributes }}>
+            <div class="promo-card__content">
+              <h2>{{ block.settings.title }}</h2>
+              <p class="price">{{ block.settings.price }}</p>
+              <span class="btn">{{ block.settings.button_text }}</span>
+            </div>
+
+            {% if block.settings.image %}
+              <img
+                src="{{ block.settings.image | image_url: width: 700 }}"
+                alt="{{ block.settings.title }}"
+                loading="lazy"
+              >
+            {% endif %}
+          </a>
+        {% endif %}
+      {% endfor %}
+
+      <!-- RIGHT BOTTOM TWO -->
+      <div class="promo-grid__bottom">
+        {% for block in section.blocks %}
+          {% if block.settings.card_position == 'right_bottom' %}
+            <a href="{{ block.settings.link }}" class="promo-card promo-card--small" {{ block.shopify_attributes }}>
+              <div class="promo-card__content">
+                <h3>{{ block.settings.title }}</h3>
+                <p class="price">{{ block.settings.price }}</p>
+                <span class="btn">{{ block.settings.button_text }}</span>
+              </div>
+
+              {% if block.settings.image %}
+                <img
+                  src="{{ block.settings.image | image_url: width: 500 }}"
+                  alt="{{ block.settings.title }}"
+                  loading="lazy"
+                >
+              {% endif %}
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.promo-grid {
+  padding: 40px 20px;
+}
+
+.promo-grid__container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.promo-grid__right {
+  display: grid;
+  gap: 20px;
+}
+
+.promo-grid__bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.promo-card {
+  background: #FFD200;
+  border-radius: 18px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: #111;
+  transition: all 0.3s ease;
+}
+
+.promo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.promo-card img {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  max-width: 55%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.promo-card--large {
+  min-height: 460px;
+}
+
+.promo-card__content {
+  position: relative;
+  z-index: 2;
+  max-width: 65%;
+}
+
+h2, h3 {
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.price {
+  font-weight: 700;
+  margin: 6px 0 12px;
+}
+
+.btn {
+  background: #00C2D1;
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 30px;
+  font-weight: 700;
+  display: inline-block;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .promo-grid__container {
+    grid-template-columns: 1fr;
+  }
+
+  .promo-grid__bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .promo-card img {
+    max-width: 70%;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Promo Grid Custom",
+  "blocks": [
+    {
+      "type": "promo",
+      "name": "Promo Card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "card_position",
+          "label": "Card Position",
+          "options": [
+            { "value": "left", "label": "Left Large" },
+            { "value": "right_top", "label": "Right Top (Single)" },
+            { "value": "right_bottom", "label": "Right Bottom (2 Grid)" }
+          ],
+          "default": "right_bottom"
+        },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle" },
+        { "type": "text", "id": "price", "label": "Price" },
+        { "type": "text", "id": "button_text", "label": "Button Text", "default": "Shop Now" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Promo Grid – Fixed Layout"
+    }
+  ]
+}
+{% endschema %}
