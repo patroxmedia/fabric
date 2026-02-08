@@ -9,11 +9,15 @@
     {{ media| video_tag:controls:true,  class: 'w-full h-full object-cover' }}
 
 {% when 'model' %}
-    {{ media | model_viewer_tag }}
+    
     <product-model>
       <div>
         <button class="w-full h-full bg-gray-100 border relative ">
-          <img src="{{ media | img_url:'large' }}" alt="{{media.preview.image.alt}}">
+          <img src="{{ media | img_url:'large' }}" 
+            alt="{{media.preview.image.alt}}"
+            class="w-full h-full object-cover"
+          
+          >
         </button>
       </div>
     </product-model>
